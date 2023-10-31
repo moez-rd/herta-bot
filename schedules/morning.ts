@@ -8,15 +8,15 @@ export const morning = (herta: Client) => {
   setInterval(() => {
     const now = DateTime.now()
       .setZone(config.TIMEZONE)
-      .toLocaleString(DateTime.TIME_24_SIMPLE);
+      .toLocaleString(DateTime.TIME_24_WITH_LONG_OFFSET);
 
     if (
       now ===
       DateTime.fromISO("2023-10-30T06:00:00", {
         zone: config.TIMEZONE,
-      }).toLocaleString(DateTime.TIME_24_SIMPLE)
+      }).toLocaleString(DateTime.TIME_24_WITH_LONG_OFFSET)
     ) {
-      herta.sendMessage(process.env.CHAT_CATTO_IO || "", media);
+      herta.sendMessage(process.env.CHAT_DIGITALIZM || "", media);
     }
   }, 1000);
 };

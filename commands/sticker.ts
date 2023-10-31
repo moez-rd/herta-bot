@@ -6,6 +6,11 @@ const sticker: Command = {
   aliases: ["stiker"],
   description: "Buat stiker pake gambar.",
   action: async (herta: Client, message: WAWebJS.Message) => {
+    if (message.from !== process.env.CHAT_DIGITALIZM) {
+      message.reply("Stiker hanya bisa dibuat di grup Digitalizm:(");
+      return;
+    }
+
     const media = await message.downloadMedia();
     message.reply(media, undefined, { sendMediaAsSticker: true });
   },
