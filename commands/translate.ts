@@ -44,7 +44,7 @@ const sticker: Command = {
     message.reply(`
 *Terjemahan:*
 
-${response.data.translations[0].translatedText}
+${response.data.data.translations[0].translatedText}
     `);
   },
 };
