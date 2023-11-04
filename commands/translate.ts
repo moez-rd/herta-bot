@@ -8,18 +8,25 @@ const sticker: Command = {
   description: "Google translate.",
   action: async (herta: Client, message: WAWebJS.Message) => {
     // !translate -s en -t es -m Hello World
-    const params: string[] = [];
+    type ParamsType = { s: string; t: string; q: string };
+
+    const params: ParamsType = {
+      s: "",
+      t: "",
+      q: "",
+    };
 
     const splittedMessage = message.body.split("-");
     splittedMessage.shift();
     splittedMessage.forEach((element) => {
-      params.push(element.split(" ")[1]);
+      const param: string[] = element.split(" ");
+      params[param[0] as keyof ParamsType] = param[1];
     });
 
     const encodedParams: URLSearchParams = new URLSearchParams();
-    encodedParams.set("source", params[0]);
-    encodedParams.set("target", params[1]);
-    encodedParams.set("q", params[2]);
+    encodedParams.set("source", params.s);
+    encodedParams.set("target", params.t);
+    encodedParams.set("q", params.q);
 
     const options = {
       method: "POST",
