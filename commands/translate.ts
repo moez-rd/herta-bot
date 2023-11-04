@@ -40,12 +40,12 @@ const sticker: Command = {
       data: encodedParams,
     };
 
-    try {
-      const response = await axios.request(options);
-      message.reply(response.data);
-    } catch (error) {
-      message.reply(error as string);
-    }
+    const response = await axios.request(options);
+    message.reply(`
+*Terjemahan:*
+
+${response.data.translations[0].translatedText}
+    `);
   },
 };
 
