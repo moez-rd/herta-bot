@@ -1,14 +1,12 @@
-import OpenAI from "openai";
+const str = "!translate -s en -t es -m Hello WOrld";
 
-const openai = new OpenAI();
+const splitted = str.split("-");
+splitted.shift();
+const arr: string[] = [];
 
-async function main() {
-  const completion = await openai.chat.completions.create({
-    messages: [{ role: "system", content: "You are a helpful assistant." }],
-    model: "",
-  });
+splitted.forEach((element) => {
+  arr.push(element.split(" ")[1]);
+});
 
-  console.log(completion.choices[0]);
-}
+console.log(arr);
 
-main();
