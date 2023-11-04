@@ -20,7 +20,7 @@ const sticker: Command = {
     splittedMessage.shift();
     splittedMessage.forEach((element) => {
       const [key, ...value] = element.split(" ");
-      params[key as keyof ParamsType] = value.join(" ");
+      params[key as keyof ParamsType] = value.join(" ").trim();
     });
 
     const encodedParams: URLSearchParams = new URLSearchParams();
