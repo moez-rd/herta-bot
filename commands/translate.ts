@@ -19,8 +19,8 @@ const sticker: Command = {
     const splittedMessage = message.body.split("-");
     splittedMessage.shift();
     splittedMessage.forEach((element) => {
-      const param: string[] = element.split(" ");
-      params[param[0] as keyof ParamsType] = param[1];
+      const [key, ...value] = element.split(" ");
+      params[key as keyof ParamsType] = value.join(" ");
     });
 
     const encodedParams: URLSearchParams = new URLSearchParams();

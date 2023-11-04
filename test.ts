@@ -11,8 +11,11 @@ const arr: Cs = {
 };
 
 splitted.forEach((element) => {
-  const sp: string[] = element.split(" ");
+  const sp: string[] = element.split(" ", 2);
+  console.log(sp);
+  
   arr[sp[0] as keyof Cs] = sp[1];
 });
 
+console.log(splitted);
 console.log(arr);
