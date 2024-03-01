@@ -38,7 +38,7 @@ const ask: Command = {
         text = response.text();
       }
     } catch (error) {
-      message.reply("GoogleGenerativeAI Error: Terdapat kesalahan/konten diblokir:(")
+      text = "GoogleGenerativeAI Error: Terdapat kesalahan atau konten diblokir:("
     }
 
     message.reply(text);
