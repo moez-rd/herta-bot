@@ -18,7 +18,7 @@ const ask: Command = {
 
     const result = await model.generateContent([
       message.body.substr(message.body.indexOf(" ") + 1),
-      {inlineData: {data: media, mimeType: 'image/png'}}
+      {inlineData: {data: media, mimeType: 'image/jpeg'}}
     ]);
 
     const response = await result.response;
