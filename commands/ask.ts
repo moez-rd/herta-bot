@@ -7,24 +7,38 @@ const ask: Command = {
   aliases: ["tanya", "nanya", "gemini"],
   description: "Tanya Gemini.",
   action: async (herta: Client, message: WAWebJS.Message) => {
-    message.reply("Tunggu yaa..")
+    const waitMessages = ["Tunggu yaa...", "Tunggu...", "Wait...", "Bentar yaa"]
 
-    const media = await message.downloadMedia();
-    console.log(media.data);
-    
+    message.reply(waitMessages[Math.floor(Math.random() * waitMessages.length)])
 
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-    const model = genAI.getGenerativeModel({ model: "gemini-pro-vision"});
 
-    const result = await model.generateContent([
-      message.body.substr(message.body.indexOf(" ") + 1),
-      {inlineData: {data: media.data, mimeType: 'image/jpeg'}}
-    ]);
+    const prompt = message.body.substr(message.body.indexOf(" ") + 1)
 
-    const response = await result.response;
-    const text = response.text();
+    let text: string = ""
+
+    if (message.hasMedia) {
+      const media = await message.downloadMedia();
+
+      const model = genAI.getGenerativeModel({ model: "gemini-pro-vision" });
+      const result = await model.generateContent([
+        prompt,
+        { inlineData: { data: media.data, mimeType: 'image/jpeg' } }
+      ]);
+
+      const response = await result.response;
+      text = response.text();
+
+    } else {
+      const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+      const result = await model.generateContent(prompt);
+
+      const response = await result.response;
+      text = response.text();
+    }
 
     message.reply(text);
+
   },
 };
 
