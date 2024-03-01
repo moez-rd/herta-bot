@@ -43,14 +43,18 @@ async function connect() {
     morning(herta);
   });
 
-  herta.on("disconnected", async (reason) => {
+  herta.on("disconnected", async (reason: WAWebJS.WAState | "NAVIGATION") => {
     console.log("Disconnect ", reason);
     connect();
   });
 
+  herta.on("incoming_call", async (call) => {
+    call.reject()
+  })
+
   herta.on("message", async (message: WAWebJS.Message) => {
     if (message.body.toLowerCase().startsWith(`${config.PREFIX}help`)) {
-      let response = "*=== HERTA COMMANDS ===*\n\n";
+      let response = "*=== SELEDRI COMMANDS ===*\n\n";
       (await commands).forEach((command) => {
         response += `*[${config.PREFIX}${command.name}`;
 
