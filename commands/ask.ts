@@ -10,6 +10,8 @@ const ask: Command = {
     message.reply("Tunggu yaa..")
 
     const media = await message.downloadMedia();
+    console.log(media.mimetype);
+    
 
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
     const model = genAI.getGenerativeModel({ model: "gemini-pro-vision"});
@@ -18,7 +20,7 @@ const ask: Command = {
       message.body.substr(message.body.indexOf(" ") + 1),
       {inlineData: {data: media, mimeType: 'image/png'}}
     ]);
-    
+
     const response = await result.response;
     const text = response.text();
 
