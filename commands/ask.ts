@@ -17,24 +17,28 @@ const ask: Command = {
 
     let text: string = ""
 
-    if (message.hasMedia) {
-      const media = await message.downloadMedia();
-
-      const model = genAI.getGenerativeModel({ model: "gemini-pro-vision" });
-      const result = await model.generateContent([
-        prompt,
-        { inlineData: { data: media.data, mimeType: 'image/jpeg' } }
-      ]);
-
-      const response = await result.response;
-      text = response.text();
-
-    } else {
-      const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-      const result = await model.generateContent(prompt);
-
-      const response = await result.response;
-      text = response.text();
+    try {
+      if (message.hasMedia) {
+        const media = await message.downloadMedia();
+  
+        const model = genAI.getGenerativeModel({ model: "gemini-pro-vision" });
+        const result = await model.generateContent([
+          prompt,
+          { inlineData: { data: media.data, mimeType: 'image/jpeg' } }
+        ]);
+  
+        const response = await result.response;
+        text = response.text();
+  
+      } else {
+        const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+        const result = await model.generateContent(prompt);
+  
+        const response = await result.response;
+        text = response.text();
+      }
+    } catch (error) {
+      message.reply("GoogleGenerativeAI Error: Terdapat kesalahan/konten diblokir:(")
     }
 
     message.reply(text);
