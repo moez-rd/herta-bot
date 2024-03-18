@@ -54,7 +54,7 @@ async function connect() {
 
   herta.on("message", async (message: WAWebJS.Message) => {
     if (message.body.toLowerCase().startsWith(`${config.PREFIX}help`)) {
-      let response = "*=== SELEDRI COMMANDS ===*\n\n";
+      let response = "*=== HERTA COMMANDS ===*\n\n";
       (await commands).forEach((command) => {
         response += `*[${config.PREFIX}${command.name}`;
 
