@@ -3,7 +3,6 @@ import { Command } from "../types/command";
 
 const ping: Command = {
   name: "ping",
-  aliases: ["wtf"],
   description: "pong.",
   action: (herta: Client, message: WAWebJS.Message) => {
     message.reply("pong");

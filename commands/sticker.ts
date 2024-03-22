@@ -7,7 +7,7 @@ const sticker: Command = {
   description: "Buat stiker pake gambar.",
   action: async (herta: Client, message: WAWebJS.Message) => {
     if (message.from !== process.env.CHAT_DIGITALIZM) {
-      message.reply("Stiker hanya bisa dibuat di grup Digitalizm:(");
+      message.reply("Stiker tidak dapat dibuat di grup ini:(");
       return;
     }
 
