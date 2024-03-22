@@ -12,7 +12,6 @@ const sticker: Command = {
         return
     }
 
-    const media = await message.downloadMedia();
     message.reply(message.from);
   },
 };
