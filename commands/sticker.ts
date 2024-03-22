@@ -6,7 +6,7 @@ const sticker: Command = {
   aliases: ["stiker"],
   description: "Buat stiker pake gambar.",
   action: async (herta: Client, message: WAWebJS.Message) => {
-    if ([process.env.CHAT_KIYOWO, process.env.CHAT_NGODINGVARENG].includes(message.from)) {
+    if (![process.env.CHAT_KIYOWO, process.env.CHAT_NGODINGVARENG].includes(message.from)) {
       message.reply("Stiker tidak dapat dibuat di grup ini:(");
       return;
     }
